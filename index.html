@@ -1,0 +1,67 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photos</title>
+    <style>
+        body{
+            color: white;
+            background-color: black;
+        }
+        #slider{
+            margin-top: 5px;
+            padding: 10px;
+            height: 90%;
+            background-image: url(/slideshowlogo.png);
+            background-size:contain ;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            background-position: center center;
+        }
+    </style>
+</head>
+<body >
+    <div align="center">
+        Enter Path <input type="text" id="path">
+        First image <input type="text" name="first" id="first">
+        Last image <input type="text" name="last" id="last">
+        Enter Duration(s) <input type="number" name="dura" id="dura">
+        <button type="button" id="start">Start</button>
+        <button type="button" id="stop">Stop</button>
+    </div>
+    <div id="slider" ></div>
+
+    
+    <script>
+        var slider = document.getElementById('slider')
+
+        document.getElementById('start').onclick = function(){
+        const path = document.querySelector('#path').value;
+        const duration = document.querySelector('#dura').value;
+        const first = document.querySelector('#first').value;
+        const last = document.querySelector('#last').value;
+        //const slideInterval = setInterval(slideshow,duration*1000)
+        var temp = first;
+        slideshow(temp)
+        function slideshow(temp){
+            
+            setTimeout(
+                function(){  
+                    slider.style.backgroundImage = "url(/"+path+temp+".JPG)"
+                    temp++;
+                    if(temp<=last){
+                    slideshow(temp)
+                    }else{
+                        slider.style.backgroundImage = "url(/slideshowlogo.png)" 
+                    }
+                }
+            ,duration*1000)
+        
+        }
+        }
+
+
+    </script>
+</body>
+</html>
